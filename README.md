@@ -46,3 +46,7 @@ subscription.unsubscribe(); // an observer proactively unsubscribe
 
 
 Probably a more important distinction between Subject and Observable is that a Subject has state, it keeps a list of observers. On the other hand, an Observable is really just a function that sets up observation.
+
+
+> https://michalzalecki.com/use-rxjs-with-react/#actions-actioncreators-constants
+Subject is both at the same time, observable and observer.
