@@ -105,6 +105,16 @@ test('completed props stream should throw an exception', () => {
 
   expect(wrapper.find('div').length).toBe(1)
 
+  /* > https://stackoverflow.com/a/41224462/6560291
+  You have to use global to access objects in the global context
+
+  global.console = {warn: jest.fn()}
+  expect(console.warn).toBeCalled()
+  or use jest.spyOn added in 19.0.0
+
+  jest.spyOn(global.console, 'warn')
+  
+  */
   const error = sinon.stub(console, 'error')
 
   expect(() => wrapper.unmount()).toThrowError(/no elements in sequence/)
