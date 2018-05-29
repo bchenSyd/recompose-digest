@@ -7,6 +7,9 @@ test('copies non-React static properties from base component to new component', 
   const BaseComponent = sinon.spy(() => null)
   BaseComponent.foo = () => {}
 
+  // the first paramter passed into hoistStatics is a HOC function,
+  // which is very different from others (prop mapper, an object ..etc)
+  // so it can't be composed like others
   const EnhancedComponent = hoistStatics(
     mapProps(props => ({ n: props.n * 5 }))
   )(BaseComponent)
