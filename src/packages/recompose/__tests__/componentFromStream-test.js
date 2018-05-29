@@ -7,7 +7,8 @@ import { componentFromStreamWithConfig } from '../componentFromStream'
 
 const componentFromStream = componentFromStreamWithConfig(rxjsConfig)
 
-test('componentFromStream creates a component from a prop stream transformation', () => {
+// vdom$ = f(props$)
+test('componentFromStream transform a props$ stream into a vdom$ stream', () => {
   const Double = componentFromStream(props$ =>
     props$.map(({ n }) =>
       <div>
@@ -50,18 +51,25 @@ test('componentFromStream renders nothing until the stream emits a value', () =>
   expect(wrapper.find('div').length).toBe(1)
 })
 
-test('handler multiple observers of props stream', () => {
+test.only('handler multiple observers of props stream', () => {
   const Other = () => <div />
   const Div = componentFromStream(props$ =>
     // Adds three observers to props stream
-    props$.combineLatest(props$, props$, props1 => <Other {...props1} />)
+    // Rx.Observable.combineLatest(...args, [resultSelector])
+    // args: an array or arguments of Observable sequences
+    // resultSelector: Function to invoke whenever either of the sources produces an elemen
+    // returns :
+    // An observable sequence containing the result of combining elements of the sources using the specified result selector function.
+    props$.combineLatest(props$, props$, props1 => {
+      // if any of the observable sequences produces an element (called next), the selector function will be invoked;
+      return <Other {...props1} />
+    })
   )
 
-  const wrapper = mount(<Div data-value={1} />)
-  const div = wrapper.find(Other)
+  const wrapper = mount(<Div data-value={1} another="hello" />)
 
-  expect(div.prop('data-value')).toBe(1)
   wrapper.setProps({ 'data-value': 2 })
+
   wrapper.update()
   const div2 = wrapper.find(Other)
   expect(div2.prop('data-value')).toBe(2)
@@ -82,7 +90,10 @@ test('complete props stream before unmounting', () => {
       })
       .startWith(null)
 
-    return props$.combineLatest(first$, last$, props1 => <div {...props1} />)
+    return props$.combineLatest(first$, last$, props1 => {
+      console.log(props1)
+      return <div {...props1} />
+    })
   })
 
   const wrapper = mount(<Div />)
@@ -98,7 +109,9 @@ test('completed props stream should throw an exception', () => {
   const Div = componentFromStream(props$ => {
     const first$ = props$.filter(() => false).first().startWith(null)
 
-    return props$.combineLatest(first$, props1 => <div {...props1} />)
+    return props$.combineLatest(first$, props1 => {
+      return <div {...props1} />
+    })
   })
 
   const wrapper = mount(<Div />)
