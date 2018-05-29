@@ -60,7 +60,7 @@ test.only('handler multiple observers of props stream', () => {
     // resultSelector: Function to invoke whenever either of the sources produces an elemen
     // returns :
     // An observable sequence containing the result of combining elements of the sources using the specified result selector function.
-    props$.combineLatest(props$, props$ , props1 => {  // here we have 3 observables:  firstOne.combineLatest(second, third, resultSelector)
+    props$.combineLatest(props$, props$ , (props1, props2, props3) => {  // here we have 3 observables:  firstOne.combineLatest(second, third, resultSelector)
       // if any of the observable sequences produces an element (called next), the selector function will be invoked;
       console.log('rxjs got a value: ',props1)
       return <Other {...props1} />
