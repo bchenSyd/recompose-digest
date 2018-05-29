@@ -1,8 +1,7 @@
 import hoistNonReactStatics from 'hoist-non-react-statics'
 
 const hoistStatics = (higherOrderComponent, blacklist) => BaseComponent => {
-  const NewComponent = higherOrderComponent(BaseComponent)
-  hoistNonReactStatics(NewComponent, BaseComponent, blacklist)
+  hoistNonReactStatics(higherOrderComponent(BaseComponent), BaseComponent, blacklist)
   return NewComponent
 }
 
