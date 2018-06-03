@@ -3,6 +3,12 @@ While observables aren’t something you’ll find in the GoF’s Design Pattern
 ![](https://cdn-images-1.medium.com/max/800/1*isWKTKNBoQrE5av1FZr6wQ.png)
 
 ```js
+type Subscribe = IObserver => ISubscrition;
+interface IObservable{
+  constructor: Subscribe,
+  subscribe: Subscribe, // an Observable has subscribe function, which sets up subscription
+}
+
 interface IObserver{
   next: (val)=>any, // notify
   error: err=>any,
@@ -13,15 +19,11 @@ interface ISubscription{
   unsubscribe: void=>any
 }
 
-interface IObservable{
-  constructor: (IObserver)=> ISubscription,
-  subscribe: IObserver => ISubscription,
-}
 
 
 const { Observable } = require("rxjs");
 
-const observable = new Observable(observer => {
+const subscribe: Subscribe = (observer:IObserver) => {
   observer.next(1); // notify observers
   observer.next(2);
   //if you emit `observer.complete()` from the observerable, all observers will be auto unsubscribed;
@@ -30,7 +32,8 @@ const observable = new Observable(observer => {
       console.log("unsubscribe");
     }
   };
-});
+}
+const observable = new Observable(subscribe);
 
 console.log("before subscribe");
 
