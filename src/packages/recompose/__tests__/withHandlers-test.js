@@ -3,7 +3,7 @@ import { mount } from 'enzyme'
 import sinon from 'sinon'
 import { withHandlers, withState, compose } from '../'
 
-test('withHandlers passes handlers to base component', () => {
+test.only('withHandlers passes handlers to base component', () => {
   let submittedFormValue
   const enhanceForm = compose(
     withState('value', 'updateValue', ''),
