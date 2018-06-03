@@ -11,7 +11,8 @@
   "env": {
     "cjs": {
       "plugins": [
-        "transform-es2015-modules-commonjs"
+        // This plugin transforms ES2015 modules to CommonJS.
+        "transform-es2015-modules-commonjs" 
       ]
     },
     "test": {
