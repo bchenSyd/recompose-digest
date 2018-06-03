@@ -1,3 +1,7 @@
+// symbol-observable is a simple implementation of ECMA Observerable, 
+// it is the same as Rxjs, Xstream and Most.js, except that it doesn't implement transform utils like 'mapto, scan, combineLatest..etc'
+// it can be converted into Rxjs
+
 const  $$observable = require('symbol-observable');
 
 const myObservable = {
