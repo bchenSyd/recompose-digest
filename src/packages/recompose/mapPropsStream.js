@@ -1,5 +1,5 @@
 import { createFactory } from 'react'
-import $$observable from 'symbol-observable'
+import $$observable from 'symbol-observable' // symbo-observable is same as Rxjs, XStream and Most.js, see ../../symbol-observable.js
 import { componentFromStreamWithConfig } from './componentFromStream'
 import setDisplayName from './setDisplayName'
 import wrapDisplayName from './wrapDisplayName'
@@ -15,21 +15,30 @@ export const mapPropsStreamWithConfig = config => {
   return transform => BaseComponent => {
     const factory = createFactory(BaseComponent)
     const { fromESObservable, toESObservable } = config
-    return componentFromStream(props$ => ({
-      subscribe(observer) {
-        const subscription = toESObservable(
-          transform(fromESObservable(props$))
-        ).subscribe({
-          next: childProps => observer.next(factory(childProps)),
-        })
-        return {
-          unsubscribe: () => subscription.unsubscribe(),
-        }
-      },
-      [$$observable]() {
-        return this
-      },
-    }))
+
+    const props2vdom = props$ => {
+      // below object is `symbol-observable` polyfilled, mostly by having `[$$observable]() { return this; }`
+      // so it conforms to ECMA Observable proposal and is a fullon Observable itself,
+      // therefore it can be (later on) converted to an Rxjs observable
+      // see ../../symbol-observable.js for details
+      return {
+        subscribe(observer) {
+          const subscription = toESObservable(
+            transform(fromESObservable(props$))
+          ).subscribe({
+            next: childProps => observer.next(factory(childProps)),
+          })
+          return {
+            unsubscribe: () => subscription.unsubscribe(),
+          }
+        },
+        [$$observable]() {
+          return this
+        },
+      };
+    }
+
+    return componentFromStream(props2vdom);
   }
 }
 
