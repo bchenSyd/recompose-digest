@@ -1,1 +1,1 @@
-import '../../../../../lib/packages/recompose/es/Recompose.js'
+import '../../../../../lib/packages/recompose/es/Recompose.js';

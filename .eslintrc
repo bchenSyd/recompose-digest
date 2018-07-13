@@ -18,7 +18,7 @@
     "sinon": true
   },
   "rules": {
-    "semi": [2, "never"],
+    "semi": [2, "always"],
     "no-use-before-define": ["error", { "functions": false }],
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "no-underscore-dangle": [0],
@@ -37,7 +37,6 @@
     "react/prefer-stateless-function": [0],
     "react/no-multi-comp": [0],
     "react/sort-comp": [0],
-    "react/jsx-filename-extension": [0],
-    "prettier/prettier": ["error", {"semi": false, "trailingComma": "es5", "singleQuote": true}]
+    "react/jsx-filename-extension": [0]
   }
 }

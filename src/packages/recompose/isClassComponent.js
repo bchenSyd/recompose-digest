@@ -3,6 +3,6 @@ const isClassComponent = Component =>
     Component &&
       Component.prototype &&
       typeof Component.prototype.render === 'function'
-  )
+  );
 
-export default isClassComponent
+export default isClassComponent;

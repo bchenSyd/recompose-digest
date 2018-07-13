@@ -1,17 +1,17 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-import { nest, setDisplayName, toClass } from '../'
+import React from 'react';
+import { shallow } from 'enzyme';
+import { nest, setDisplayName, toClass } from '../';
 
 test('nest nests components from outer to inner', () => {
-  const A = setDisplayName('A')(toClass('div'))
-  const B = setDisplayName('B')(toClass('div'))
-  const C = setDisplayName('C')(toClass('div'))
+  const A = setDisplayName('A')(toClass('div'));
+  const B = setDisplayName('B')(toClass('div'));
+  const C = setDisplayName('C')(toClass('div'));
 
-  const Nest = nest(A, B, C)
+  const Nest = nest(A, B, C);
 
-  expect(Nest.displayName).toBe('nest(A, B, C)')
+  expect(Nest.displayName).toBe('nest(A, B, C)');
 
-  const wrapper = shallow(<Nest pass="through">Child</Nest>)
+  const wrapper = shallow(<Nest pass="through">Child</Nest>);
 
   expect(
     wrapper.equals(
@@ -21,5 +21,5 @@ test('nest nests components from outer to inner', () => {
         </B>
       </A>
     )
-  ).toBe(true)
-})
+  ).toBe(true);
+});

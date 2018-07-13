@@ -1,8 +1,8 @@
 const setStatic = (key, value) => BaseComponent => {
   /* eslint-disable no-param-reassign */
-  BaseComponent[key] = value
+  BaseComponent[key] = value;
   /* eslint-enable no-param-reassign */
-  return BaseComponent
-}
+  return BaseComponent;
+};
 
-export default setStatic
+export default setStatic;

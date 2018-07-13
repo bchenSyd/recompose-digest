@@ -1,12 +1,12 @@
 const omit = (obj, keys) => {
-  const { ...rest } = obj
+  const { ...rest } = obj;
   for (let i = 0; i < keys.length; i++) {
-    const key = keys[i]
+    const key = keys[i];
     if (rest.hasOwnProperty(key)) {
-      delete rest[key]
+      delete rest[key];
     }
   }
-  return rest
-}
+  return rest;
+};
 
-export default omit
+export default omit;

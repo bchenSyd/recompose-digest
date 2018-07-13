@@ -1,30 +1,30 @@
-import path from 'path'
-import nodeResolve from 'rollup-plugin-node-resolve'
-import babel from 'rollup-plugin-babel'
-import replace from 'rollup-plugin-replace'
-import commonjs from 'rollup-plugin-commonjs'
-import uglify from 'rollup-plugin-uglify'
-import { sizeSnapshot } from 'rollup-plugin-size-snapshot'
-import { pascalCase } from 'change-case'
+import path from 'path';
+import nodeResolve from 'rollup-plugin-node-resolve';
+import babel from 'rollup-plugin-babel';
+import replace from 'rollup-plugin-replace';
+import commonjs from 'rollup-plugin-commonjs';
+import uglify from 'rollup-plugin-uglify';
+import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
+import { pascalCase } from 'change-case';
 
-const { PACKAGES_SRC_DIR, PACKAGES_OUT_DIR } = require('./getPackageNames')
+const { PACKAGES_SRC_DIR, PACKAGES_OUT_DIR } = require('./getPackageNames');
 
-const packageName = process.env.PACKAGE_NAME
+const packageName = process.env.PACKAGE_NAME;
 
-const libraryName = pascalCase(packageName)
+const libraryName = pascalCase(packageName);
 
-const input = `./${path.join(PACKAGES_SRC_DIR, packageName, 'index.js')}`
+const input = `./${path.join(PACKAGES_SRC_DIR, packageName, 'index.js')}`;
 
-const outDir = path.join(PACKAGES_OUT_DIR, packageName, 'dist')
+const outDir = path.join(PACKAGES_OUT_DIR, packageName, 'dist');
 
-const isExternal = id => !id.startsWith('.') && !id.startsWith('/')
+const isExternal = id => !id.startsWith('.') && !id.startsWith('/');
 
 const getBabelOptions = () => ({
   exclude: '**/node_modules/**',
   runtimeHelpers: true,
-})
+});
 
-const matchSnapshot = process.env.SNAPSHOT === 'match'
+const matchSnapshot = process.env.SNAPSHOT === 'match';
 
 export default [
   {
@@ -87,4 +87,4 @@ export default [
     external: isExternal,
     plugins: [babel(getBabelOptions()), sizeSnapshot({ matchSnapshot })],
   },
-]
+];

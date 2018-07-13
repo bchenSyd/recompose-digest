@@ -1,5 +1,5 @@
-import setStatic from './setStatic'
+import setStatic from './setStatic';
 
-const setDisplayName = displayName => setStatic('displayName', displayName)
+const setDisplayName = displayName => setStatic('displayName', displayName);
 
-export default setDisplayName
+export default setDisplayName;

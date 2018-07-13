@@ -1,25 +1,25 @@
-import { createFactory, Component } from 'react'
-import setDisplayName from './setDisplayName'
-import wrapDisplayName from './wrapDisplayName'
+import { createFactory, Component } from 'react';
+import setDisplayName from './setDisplayName';
+import wrapDisplayName from './wrapDisplayName';
 
 const shouldUpdate = test => BaseComponent => {
-  const factory = createFactory(BaseComponent)
+  const factory = createFactory(BaseComponent);
   class ShouldUpdate extends Component {
     shouldComponentUpdate(nextProps) {
-      return test(this.props, nextProps)
+      return test(this.props, nextProps);
     }
 
     render() {
-      return factory(this.props)
+      return factory(this.props);
     }
   }
 
   if (process.env.NODE_ENV !== 'production') {
     return setDisplayName(wrapDisplayName(BaseComponent, 'shouldUpdate'))(
       ShouldUpdate
-    )
+    );
   }
-  return ShouldUpdate
-}
+  return ShouldUpdate;
+};
 
-export default shouldUpdate
+export default shouldUpdate;

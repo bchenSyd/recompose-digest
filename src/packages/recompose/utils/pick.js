@@ -1,12 +1,12 @@
 const pick = (obj, keys) => {
-  const result = {}
+  const result = {};
   for (let i = 0; i < keys.length; i++) {
-    const key = keys[i]
+    const key = keys[i];
     if (obj.hasOwnProperty(key)) {
-      result[key] = obj[key]
+      result[key] = obj[key];
     }
   }
-  return result
-}
+  return result;
+};
 
-export default pick
+export default pick;

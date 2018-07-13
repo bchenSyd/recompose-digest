@@ -1,10 +1,10 @@
-const fs = require('fs')
-const path = require('path')
+const fs = require('fs');
+const path = require('path');
 
-exports.PACKAGES_SRC_DIR = './src/packages'
-exports.PACKAGES_OUT_DIR = './lib/packages'
+exports.PACKAGES_SRC_DIR = './src/packages';
+exports.PACKAGES_OUT_DIR = './lib/packages';
 
-let names
+let names;
 
 exports.getPackageNames = () => {
   if (!names) {
@@ -14,12 +14,12 @@ exports.getPackageNames = () => {
           exports.PACKAGES_SRC_DIR,
           file,
           'package.json'
-        )
-        return fs.statSync(packageJsonPath).isFile()
+        );
+        return fs.statSync(packageJsonPath).isFile();
       } catch (error) {
-        return false
+        return false;
       }
-    })
+    });
   }
-  return names
-}
+  return names;
+};

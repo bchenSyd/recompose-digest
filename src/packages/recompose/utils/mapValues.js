@@ -1,16 +1,16 @@
 const mapValues = (obj, func) => {
   debugger;
-  
-  const result = {}
+
+  const result = {};
   /* eslint-disable no-restricted-syntax */
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
       const val = obj[key];
-      result[key] = func(val, key)
+      result[key] = func(val, key);
     }
   }
   /* eslint-enable no-restricted-syntax */
-  return result
-}
+  return result;
+};
 
-export default mapValues
+export default mapValues;

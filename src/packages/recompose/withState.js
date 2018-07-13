@@ -1,13 +1,13 @@
-import { createFactory, Component } from 'react'
-import setDisplayName from './setDisplayName'
-import wrapDisplayName from './wrapDisplayName'
+import { createFactory, Component } from 'react';
+import setDisplayName from './setDisplayName';
+import wrapDisplayName from './wrapDisplayName';
 
 const withState = (
   stateName,
   stateUpdaterName,
   initialState
 ) => BaseComponent => {
-  const factory = createFactory(BaseComponent)
+  const factory = createFactory(BaseComponent);
   class WithState extends Component {
     state = {
       stateValue:
@@ -30,16 +30,16 @@ const withState = (
         ...this.props,
         [stateName]: this.state.stateValue,
         [stateUpdaterName]: this.updateStateValue,
-      })
+      });
     }
   }
 
   if (process.env.NODE_ENV !== 'production') {
     return setDisplayName(wrapDisplayName(BaseComponent, 'withState'))(
       WithState
-    )
+    );
   }
-  return WithState
-}
+  return WithState;
+};
 
-export default withState
+export default withState;

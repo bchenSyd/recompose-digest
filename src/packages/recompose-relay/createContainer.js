@@ -1,7 +1,7 @@
-import Relay from 'react-relay'
-import { toClass } from 'recompose'
+import Relay from 'react-relay';
+import { toClass } from 'recompose';
 
 const createContainer = options => BaseComponent =>
-  Relay.createContainer(toClass(BaseComponent), options)
+  Relay.createContainer(toClass(BaseComponent), options);
 
-export default createContainer
+export default createContainer;

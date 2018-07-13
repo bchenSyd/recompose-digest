@@ -1,11 +1,11 @@
 let _config = {
   fromESObservable: null,
   toESObservable: null,
-}
+};
 
 const configureObservable = c => {
-  _config = c
-}
+  _config = c;
+};
 
 export const config = {
   fromESObservable: observable =>
@@ -16,6 +16,6 @@ export const config = {
     typeof _config.toESObservable === 'function'
       ? _config.toESObservable(stream)
       : stream,
-}
+};
 
-export default configureObservable
+export default configureObservable;

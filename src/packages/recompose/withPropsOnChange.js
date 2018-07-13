@@ -1,12 +1,12 @@
-import { createFactory, Component } from 'react'
-import { polyfill } from 'react-lifecycles-compat'
-import pick from './utils/pick'
-import shallowEqual from './shallowEqual'
-import setDisplayName from './setDisplayName'
-import wrapDisplayName from './wrapDisplayName'
+import { createFactory, Component } from 'react';
+import { polyfill } from 'react-lifecycles-compat';
+import pick from './utils/pick';
+import shallowEqual from './shallowEqual';
+import setDisplayName from './setDisplayName';
+import wrapDisplayName from './wrapDisplayName';
 
 const withPropsOnChange = (shouldMapOrKeys, propsMapper) => BaseComponent => {
-  const factory = createFactory(BaseComponent)
+  const factory = createFactory(BaseComponent);
   const shouldMap =
     typeof shouldMapOrKeys === 'function'
       ? shouldMapOrKeys
@@ -14,7 +14,7 @@ const withPropsOnChange = (shouldMapOrKeys, propsMapper) => BaseComponent => {
           !shallowEqual(
             pick(props, shouldMapOrKeys),
             pick(nextProps, shouldMapOrKeys)
-          )
+          );
 
   class WithPropsOnChange extends Component {
     state = {
@@ -27,29 +27,29 @@ const withPropsOnChange = (shouldMapOrKeys, propsMapper) => BaseComponent => {
         return {
           computedProps: propsMapper(nextProps),
           prevProps: nextProps,
-        }
+        };
       }
 
-      return null
+      return null;
     }
 
     render() {
       return factory({
         ...this.props,
         ...this.state.computedProps,
-      })
+      });
     }
   }
 
-  polyfill(WithPropsOnChange)
+  polyfill(WithPropsOnChange);
 
   if (process.env.NODE_ENV !== 'production') {
     return setDisplayName(wrapDisplayName(BaseComponent, 'withPropsOnChange'))(
       WithPropsOnChange
-    )
+    );
   }
 
-  return WithPropsOnChange
-}
+  return WithPropsOnChange;
+};
 
-export default withPropsOnChange
+export default withPropsOnChange;

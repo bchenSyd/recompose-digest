@@ -1,8 +1,8 @@
-import { createFactory, Component } from 'react'
-import setDisplayName from './setDisplayName'
-import wrapDisplayName from './wrapDisplayName'
+import { createFactory, Component } from 'react';
+import setDisplayName from './setDisplayName';
+import wrapDisplayName from './wrapDisplayName';
 
-const noop = () => {}
+const noop = () => {};
 
 const withReducer = (
   stateName,
@@ -10,7 +10,7 @@ const withReducer = (
   reducer,
   initialState
 ) => BaseComponent => {
-  const factory = createFactory(BaseComponent)
+  const factory = createFactory(BaseComponent);
   class WithReducer extends Component {
     state = {
       stateValue: this.initializeStateValue(),
@@ -20,9 +20,9 @@ const withReducer = (
       if (initialState !== undefined) {
         return typeof initialState === 'function'
           ? initialState(this.props)
-          : initialState
+          : initialState;
       }
-      return reducer(undefined, { type: '@@recompose/INIT' })
+      return reducer(undefined, { type: '@@recompose/INIT' });
     }
 
     dispatch = (action, callback = noop) =>
@@ -38,16 +38,16 @@ const withReducer = (
         ...this.props,
         [stateName]: this.state.stateValue,
         [dispatchName]: this.dispatch,
-      })
+      });
     }
   }
 
   if (process.env.NODE_ENV !== 'production') {
     return setDisplayName(wrapDisplayName(BaseComponent, 'withReducer'))(
       WithReducer
-    )
+    );
   }
-  return WithReducer
-}
+  return WithReducer;
+};
 
-export default withReducer
+export default withReducer;

@@ -1,10 +1,10 @@
-import onlyUpdateForKeys from './onlyUpdateForKeys'
-import setDisplayName from './setDisplayName'
-import wrapDisplayName from './wrapDisplayName'
-import getDisplayName from './getDisplayName'
+import onlyUpdateForKeys from './onlyUpdateForKeys';
+import setDisplayName from './setDisplayName';
+import wrapDisplayName from './wrapDisplayName';
+import getDisplayName from './getDisplayName';
 
 const onlyUpdateForPropTypes = BaseComponent => {
-  const propTypes = BaseComponent.propTypes
+  const propTypes = BaseComponent.propTypes;
 
   if (process.env.NODE_ENV !== 'production') {
     if (!propTypes) {
@@ -18,15 +18,15 @@ const onlyUpdateForPropTypes = BaseComponent => {
     }
   }
 
-  const propKeys = Object.keys(propTypes || {})
-  const OnlyUpdateForPropTypes = onlyUpdateForKeys(propKeys)(BaseComponent)
+  const propKeys = Object.keys(propTypes || {});
+  const OnlyUpdateForPropTypes = onlyUpdateForKeys(propKeys)(BaseComponent);
 
   if (process.env.NODE_ENV !== 'production') {
     return setDisplayName(
       wrapDisplayName(BaseComponent, 'onlyUpdateForPropTypes')
-    )(OnlyUpdateForPropTypes)
+    )(OnlyUpdateForPropTypes);
   }
-  return OnlyUpdateForPropTypes
-}
+  return OnlyUpdateForPropTypes;
+};
 
-export default onlyUpdateForPropTypes
+export default onlyUpdateForPropTypes;
