@@ -1,4 +1,4 @@
-{
+module.exports = {
   "extends": [
     "eslint-config-airbnb",
     "prettier",
@@ -37,6 +37,9 @@
     "react/prefer-stateless-function": [0],
     "react/no-multi-comp": [0],
     "react/sort-comp": [0],
-    "react/jsx-filename-extension": [0]
+    "react/jsx-filename-extension": [0],
+    // you don't this. you have already got a .prettierrc
+    // duplicate
+    // "prettier/prettier": ["error", {"semi": false, "trailingComma": "es5", "singleQuote": true}]
   }
 }
